@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'userCURD.wsgi.application'
 DATABASES = {
     'default':{
 		'ENGINE':'django.db.backends.mysql',
-		'NAME':'mydemo',#数据表名字
+		'NAME':'userscrud',#数据表名字
 		'USER':'root',
 		'PASSWORD':'root',
 		'HOST':'localhost',

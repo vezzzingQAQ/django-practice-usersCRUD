@@ -105,7 +105,7 @@ def insertUsers(request):
     try:
         ob=Users()
         #从表单获取要添加的信息
-        ob.name=request.POST['name']
+        ob.name=request.POST['name']#<input name='name'...>
         ob.age=request.POST['age']
         ob.phone=request.POST['phone']
         ob.save()
@@ -129,6 +129,7 @@ def editUsers(request,userId=0):
     try:
         ob=Users.objects.get(id=userId)
         uploadContext={"user":ob}
+        #<input name="id" type="hidden" value={{user.id}}>
         return(render(request,"myapp/users/edit.html",uploadContext))
     except:
         uploadContext={"info":"没有找到要修改的数据"}

@@ -6,6 +6,13 @@
         <title>用户信息</title>
         <!--templates/myapp/users/index.html-->
     </head>
+    <script>
+        function doDel(uu){
+            if(confirm("确定要删除吗?")){
+                window.location=uu;
+            }
+        }
+    </script>
     <style>
         .header{
             text-align: center;
@@ -69,7 +76,7 @@
                         <td>{{user.age}}</td>
                         <td>{{user.phone}}</td>
                         <td>{{user.addTime}}</td>
-                        <td><a href="{% url 'editusers' user.id %}">编辑</a><a href="{% url 'delusers' user.id %}">删除</a></td><!--URL反向解析-->
+                        <td><a href="{% url 'editusers' user.id %}">编辑</a><a href="javascript:doDel('{% url 'delusers' user.id %}');">删除</a></td><!--URL反向解析-->
                     </tr>
                 {% endfor %}
             </table>

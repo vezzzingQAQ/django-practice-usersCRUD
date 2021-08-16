@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="webPack/ico.jpg">
         <title>用户信息</title>
         <!--templates/myapp/users/index.html-->
     </head>
@@ -26,12 +25,24 @@
             padding-left: 5px;
             padding-right: 5px;
         }
+        .header td a{
+            background-color: rgb(230, 203, 255);
+            text-decoration: none;
+            margin-left: 5px;
+            color: black;
+        }
+        .header td a:hover{
+            background-color: rgb(247, 185, 185);
+        }
         .header .headera{
             background-color: rgb(230, 203, 255);
             text-decoration: none;
             color: black;
             border-radius: 3px;
             padding: 5px;
+        }
+        .header .headera:hover{
+            background-color: rgb(247, 185, 185);
         }
     </style>
     <body>
@@ -58,7 +69,7 @@
                         <td>{{user.age}}</td>
                         <td>{{user.phone}}</td>
                         <td>{{user.addTime}}</td>
-                        <td>编辑 删除</td>
+                        <td><a href="{% url 'editusers' user.id %}">编辑</a><a href="{% url 'delusers' user.id %}">删除</a></td><!--URL反向解析-->
                     </tr>
                 {% endfor %}
             </table>

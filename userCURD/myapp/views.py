@@ -94,10 +94,13 @@ def indexUsers(request):
         return(render(request,"myapp/users/index.html",uploadContext))#加载模板
     except:
         return(HttpResponse("没有找到用户信息(○´･д･)ﾉ"))
+
 #加载添加用户信息表单
 def addUsers(request):
     return(render(request,"myapp/users/add.html"))
+
 #执行用户信息添加
+#<form action="{% url 'insertusers' %}" method="POST">
 def insertUsers(request):
     try:
         ob=Users()
@@ -109,14 +112,41 @@ def insertUsers(request):
         uploadContext={"info":"添加成功"}
     except:
         uploadContext={"info":"添加失败"}
-    return(render(request,"myapp/users/info.html"),uploadContext)
+    return(render(request,"myapp/users/info.html",uploadContext))
+
 #执行用户信息删除
 def delUsers(request,userId=0):
-    pass
+    try:
+        ob=Users.objects.get(id=userId)
+        ob.delete()
+        uploadContext={"info":"删除成功"}
+    except:
+        uploadContext={"info":"删除失败"}
+    return(render(request,"myapp/users/info.html",uploadContext))
+
 #加载用户信息修改表单
 def editUsers(request,userId=0):
-    pass
+    try:
+        ob=Users.objects.get(id=userId)
+        uploadContext={"user":ob}
+        return(render(request,"myapp/users/edit.html",uploadContext))
+    except:
+        uploadContext={"info":"没有找到要修改的数据"}
+        return(render(request,"myapp/users/info.html",uploadContext))
+
 #执行用户信息修改
+#<form action="{% url 'updateusers' %}" method="POST">
 def updateUsers(request):
-    pass
+    try:
+        currentid=request.POST['id']
+        ob=Users.objects.get(id=currentid)
+        #从表单获取要修改的信息
+        ob.name=request.POST['name']
+        ob.age=request.POST['age']
+        ob.phone=request.POST['phone']
+        ob.save()
+        uploadContext={"info":"修改成功"}
+    except:
+        uploadContext={"info":"修改失败"}
+    return(render(request,"myapp/users/info.html",uploadContext))
 

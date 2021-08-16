@@ -54,13 +54,14 @@
     <body>
         <section class="header">        
             <h2>用户信息管理</h2>
-            <h3>添加用户信息</h3>
+            <h3>修改用户信息</h3>
 
             <br>
             <a class="headera" href="{% url 'indexusers' %}">浏览信息</a>
             <a class="headera" href="{% url 'addusers' %}">添加信息</a>
-            <form action="{% url 'insertusers' %}" method="POST">
+            <form action="{% url 'updateusers' %}" method="POST">
                 {% csrf_token %}
+                <input name="id" type="hidden" value={{user.id}}>
                 <table>
                     <tr>
                         <th class="greyTr">姓名</th>
@@ -68,13 +69,13 @@
                         <th class="greyTr">电话</th>
                     </tr>
                     <tr>
-                        <td><input class="txtin" type="text" name="name"></td>
-                        <td><input class="txtin" type="text" name="age"></td>
-                        <td><input class="txtin" type="text" name="phone"></td>
+                        <td><input class="txtin" type="text" name="name" value={{user.name}}></td>
+                        <td><input class="txtin" type="text" name="age" value={{user.age}}></td>
+                        <td><input class="txtin" type="text" name="phone" value={{user.phone}}></td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <input class="button" type="submit" value="添加">
+                            <input class="button" type="submit" value="修改">
                             <input class="button" type="reset" value="重置">
                         </td>
                     </tr>
